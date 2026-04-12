@@ -13,6 +13,7 @@ async function getAuthHeaders(): Promise<HeadersInit> {
   return {
     Authorization: `Bearer ${token}`,
     "Content-Type": "application/json",
+    "ngrok-skip-browser-warning": "true",
   };
 }
 
