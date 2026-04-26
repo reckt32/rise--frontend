@@ -10,8 +10,8 @@ export interface Stock {
   ticker: string;
   cmp: number | null;
   diff_200dma: number | null;
-  trend: string | null; // "bull_run" | "bear_run" | "unconfirmed" | null
-  car_status: string | null; // "meets_car" | "not_car" | "insufficient_data" | null
+  trend: string | null; // Raw sheet value: "In Bull Run" | "In Bear Run" | "Unconfirmed" | null
+  car_status: string | null; // Raw sheet value: "Buy/Average Out" | "Avoid/Hold" | "Short History" | null
   changed: boolean;
 }
 
@@ -30,35 +30,12 @@ export interface MarketStatus {
   last_refreshed: string;
 }
 
-// Display label maps — compliance transform
-export const TREND_LABELS: Record<string, string> = {
-  bull_run: "Above all averages",
-  bear_run: "Below all averages",
-  unconfirmed: "Mixed signals",
-};
-
-export const CAR_LABELS: Record<string, string> = {
-  meets_car: "Meets CAR criteria",
-  not_car: "Does not meet CAR criteria",
-  insufficient_data: "Insufficient data",
-};
-
-export function getTrendLabel(value: string | null): string {
-  if (!value) return "—";
-  return TREND_LABELS[value] || "—";
-}
-
-export function getCarLabel(value: string | null): string {
-  if (!value) return "—";
-  return CAR_LABELS[value] || "—";
-}
-
-// Filter options for the UI
+// Filter options for the UI — use raw sheet values directly
 export const FILTER_OPTIONS = [
   { value: "", label: "All" },
-  { value: "bull_run", label: "Above all averages" },
-  { value: "bear_run", label: "Below all averages" },
-  { value: "unconfirmed", label: "Mixed signals" },
-  { value: "meets_car", label: "Meets CAR criteria" },
-  { value: "not_car", label: "Does not meet CAR criteria" },
+  { value: "In Bull Run", label: "In Bull Run" },
+  { value: "In Bear Run", label: "In Bear Run" },
+  { value: "Unconfirmed", label: "Unconfirmed" },
+  { value: "Buy/Average Out", label: "Buy/Average Out" },
+  { value: "Avoid/Hold", label: "Avoid/Hold" },
 ] as const;

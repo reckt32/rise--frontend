@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import type { Alert } from "@/types";
-import { getTrendLabel, getCarLabel } from "@/types";
 
 interface AlertsPanelProps {
   alerts: Alert[];
@@ -27,16 +26,11 @@ function describeChange(alert: Alert): string {
   const parts: string[] = [];
 
   if (alert.previous_trend !== alert.current_trend && alert.current_trend) {
-    parts.push(`Trend changed to ${getTrendLabel(alert.current_trend)}`);
+    parts.push(`Trend changed to ${alert.current_trend}`);
   }
 
   if (alert.previous_car !== alert.current_car && alert.current_car) {
-    const carLabel = getCarLabel(alert.current_car);
-    if (alert.current_car === "meets_car") {
-      parts.push(`Now meets CAR criteria`);
-    } else {
-      parts.push(`CAR status changed to ${carLabel}`);
-    }
+    parts.push(`CAR status changed to ${alert.current_car}`);
   }
 
   return parts.join(" • ") || "Status updated";

@@ -55,7 +55,7 @@ export default function FilterBar({
             htmlFor="filter-select"
             className="block text-xs text-[#E9D5FF]/50 mb-1 font-[family-name:var(--font-body)]"
           >
-            Filter
+            Technical Analysis
           </label>
           <select
             id="filter-select"
